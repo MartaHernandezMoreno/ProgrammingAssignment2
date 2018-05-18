@@ -1,16 +1,14 @@
-
 # Matrix inversion is usually a costly computation. Because of that, it is a
 # good idea write functions to cache the inverse of a matrix.
 # The following functions calculate the inverse of a matrix and cache it.
 # (to write them, I use makeVector and cachemean functions as the basis)
 
-
-# makeCacheMatrix function creates a special "matrix", which is a list
-# containing a function to:
-#    1. set the value of the matrix
-#    2. get the value of the matrix
-#    3. set the value of the inverse
-#    4. get the value of the inverse
+# I) makeCacheMatrix: creates a special "matrix", which is a list containing
+#    a function to:
+#      1. set the value of the matrix
+#      2. get the value of the matrix
+#      3. set the value of the inverse
+#      4. get the value of the inverse
 
 makeCacheMatrix <- function(x = matrix()) {
         inv <- NULL
@@ -26,12 +24,13 @@ makeCacheMatrix <- function(x = matrix()) {
              getinverse = getinverse)
 }
 
-# cacheSolve function computes the inverse of the special "matrix" returned by
-# makeCacheMatrix above. It first checks to see if the inverse has already been
-# calculated:
-#    If so, it gets the inverse from the cache and skips the computation.
-#    If not, it calculates the inverse of the data using solve(X) function and
-#    sets the value of the inverse in the cache via the setinverse function.
+# II) cacheSolve: computes the inverse of the special "matrix" returned by
+#     makeCacheMatrix above. It first checks to see if the inverse has already
+#     been calculated:
+#        If so, it gets the inverse from the cache and skips the computation.
+#        If not, it calculates the inverse of the data using solve(X) function
+#        and sets the value of the inverse in the cache via the setinverse
+#        function.
 
 cacheSolve <- function(x, ...) {
         inv <- x$getinverse()
@@ -48,7 +47,7 @@ cacheSolve <- function(x, ...) {
 
 # Two examples to check that the functions work correctly:
 
-# 2x2 MATRIX EXAMPLE:
+# 1. 2x2 MATRIX EXAMPLE:
 
 ## > x1<-rbind(c(1,-1),c(1,1))
 ## > m1 = makeCacheMatrix(x1)
@@ -74,7 +73,7 @@ cacheSolve <- function(x, ...) {
 
 
 
-# 3x3 MATRIX EXAMPLE:
+# 2. 3x3 MATRIX EXAMPLE:
 
 ## > x2<-rbind(c(1,1,0),c(1,0,1),c(0,1,0))
 ## > m2 = makeCacheMatrix(x2)
